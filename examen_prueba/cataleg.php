@@ -1,8 +1,9 @@
 <?php
 session_start();
 require("conexion.php");
-$nombre = $_SESSION['id_web'];
-if (isset($nombre)) {
+
+if (isset($_SESSION['id_web'])) {
+    $nombre = $_SESSION['id_web'];
     $select = "SELECT l.isbn, l.titulo, l.genero, r.fecha_inicio, r.fecha_fin
     FROM libros AS l LEFT JOIN reserva AS r ON l.isbn = r.libro ORDER BY l.isbn";
     $result = $conexion->query($select);
@@ -13,7 +14,7 @@ if (isset($nombre)) {
     <head>
         <meta charset="utf-8">
         <style>
-            th,td,table{
+            th, td, table {
                 border: 1px solid black;
                 padding: 10px;
                 border-collapse: collapse;
@@ -58,10 +59,11 @@ if (isset($nombre)) {
     <?php
 } else {
     echo "<h2>ERROR NO SE A INICIADO SESSION</h2>";
-    echo "<meta http-equiv='refresh' content='0.5;index.php'";
+    echo "<meta http-equiv='refresh' content='1.5;index.php'";
 }
 // Cierra la conexión con la base de datos
 mysqli_close($conexion);
     ?>
     </body>
+
     </html>
